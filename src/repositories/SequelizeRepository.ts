@@ -1,7 +1,10 @@
 "use strict";
 import { Sequelize } from "sequelize-typescript";
 
-const PostgreSQLRepository = (_sequelize?: Sequelize, _modelType?: any) => {
+/**
+ * Implementation of repository pattern via sequelize
+ */
+const SequelizeRepository = (_sequelize?: Sequelize, _modelType?: string) => {
   const sequelize = _sequelize;
   const modelType = _modelType;
   let model = sequelize[_modelType];
@@ -227,4 +230,4 @@ const PostgreSQLRepository = (_sequelize?: Sequelize, _modelType?: any) => {
   };
 };
 
-export default PostgreSQLRepository;
+export default SequelizeRepository;

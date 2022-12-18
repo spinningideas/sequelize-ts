@@ -18,5 +18,5 @@
     "types": ["node"]
   },
   "compileOnSave": true,
-  "include": ["src/**/*.ts"]
+  "include": ["src/**/*.ts", "src/migrations/1-continent-migration.ts", "src/migrations/2-country-migration.ts"]
 }

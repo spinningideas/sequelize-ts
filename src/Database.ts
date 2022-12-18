@@ -6,7 +6,7 @@ import Continent from "./models/Continent";
 // this is a POC so credentials are stored here for convenience
 const config = {
   username: "postgres",
-  password: "P0stGr3s",
+  password: "",
   database: "sequelize_ts_orm_poc",
   host: "localhost",
   dialect: "postgres",
@@ -26,9 +26,12 @@ const sequelize = new Sequelize(
 
 sequelize.addModels([Continent]);
 sequelize.addModels([Country]);
+
+// NOTE: one can also map entire folders...
 //const modelsPath = __dirname + "./models";
 //sequelize.addModels([__dirname + modelsPath]);
 
+// NOTE: one can also attempt to manage associations here
 // Object.keys(Database).forEach((modelName) => {
 //   if (Database[modelName].associate) {
 //     Database[modelName].associate(Database);

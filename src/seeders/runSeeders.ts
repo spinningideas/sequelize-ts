@@ -1,4 +1,4 @@
-import PostgreSQLRepository from "../repositories/PostgreSQLRepository";
+import SequelizeRepository from "../repositories/SequelizeRepository";
 import { Sequelize } from "sequelize-typescript";
 // import Continent from "../models/Continent";
 // import Country from "../models/Country";
@@ -7,7 +7,7 @@ import countryData from "./countryData";
 
 const seedContinents = async (sequelize) => {
   // const continentRepo = sequelize.getRepository(Continent);
-  const continentRepo = PostgreSQLRepository(sequelize, "Continent");
+  const continentRepo = SequelizeRepository(sequelize, "Continent");
   console.log("Running seeding of continents");
   const data = continentData;
   for (let i = 0; i < data.length; i++) {
@@ -22,7 +22,7 @@ const seedContinents = async (sequelize) => {
 
 const seedCountries = async (sequelize) => {
   //const countryRepo = sequelize.getRepository(Country);
-  const countryRepo = PostgreSQLRepository(sequelize, "Country");
+  const countryRepo = SequelizeRepository(sequelize, "Country");
   console.log("Running seeding of countries");
   const data = countryData;
   for (let i = 0; i < data.length; i++) {

@@ -2,7 +2,7 @@ import { DataType } from "sequelize-typescript";
 
 async function up({ context: queryInterface }) {
   console.log("Creating table country");
-  await queryInterface.createTable("country", {
+  return await queryInterface.createTable("country", {
     countryId: {
       field: "country_id",
       allowNull: false,
@@ -63,7 +63,7 @@ async function up({ context: queryInterface }) {
 }
 
 async function down({ context: queryInterface }) {
-  await queryInterface.dropTable("country");
+  return await queryInterface.dropTable("country");
 }
 
-export default { up, down };
+export { up, down };

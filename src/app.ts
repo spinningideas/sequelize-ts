@@ -3,7 +3,7 @@ import cors from "cors";
 import Database from "./Database";
 import runMigrations from "./runMigrations";
 import runSeeders from "./seeders/runSeeders";
-import PostgreSQLRepository from "./repositories/PostgreSQLRepository";
+import SequelizeRepository from "./repositories/SequelizeRepository";
 
 const app: Express = express();
 const PORT = process.env.PORT || 5001;
@@ -19,7 +19,7 @@ const db = Database;
 // Setup routes
 //==continents=======================
 app.get("/continents", async (req: Request, res: Response) => {
-  const repo = PostgreSQLRepository(db, "Continent");
+  const repo = SequelizeRepository(db, "Continent");
   return await repo.findAll().then((continents) => {
     res.json(continents);
   });
@@ -27,7 +27,7 @@ app.get("/continents", async (req: Request, res: Response) => {
 //==countries==============================
 app.get("/countries/:continentCode", async (req: Request, res: Response) => {
   let continentCode = req.params.continentCode;
-  const repoCountries = PostgreSQLRepository(db, "Country");
+  const repoCountries = SequelizeRepository(db, "Country");
   return await repoCountries
     .findWhere({
       continentCode: continentCode,
@@ -52,7 +52,7 @@ app.get(
     const { orderBy } = req.params;
     const { orderDesc } = req.params;
 
-    const repoCountries = PostgreSQLRepository(db, "Country");
+    const repoCountries = SequelizeRepository(db, "Country");
 
     const currentPageNumber = pageNumber as unknown as number;
     const currentPageSize = pageSize as unknown as number;
@@ -79,7 +79,7 @@ app.get(
 
 app.get("/country/:countryCode", async (req: Request, res: Response) => {
   let countryCode = req.params.countryCode;
-  const repoCountry = PostgreSQLRepository(db, "Country");
+  const repoCountry = SequelizeRepository(db, "Country");
   return await repoCountry
     .findOneWhere({ countryCode: countryCode })
     .then((results) => {
@@ -96,12 +96,16 @@ app.get("/country/:countryCode", async (req: Request, res: Response) => {
 //==app start AFTER DB setup==============================
 async function configureDatabase() {
   try {
+    let seedersRunSuccessfully = false;
     console.log(`Running database migrations`);
-    await runMigrations(db);
-
-    console.log(`Running database seeding`);
-    await runSeeders(db);
-    return Promise.resolve(true);
+    const migrationsRun = await runMigrations(db);
+    console.log("database migrations setup ok?:", migrationsRun);
+    if (migrationsRun) {
+      console.log(`Running database seeding`);
+      seedersRunSuccessfully = await runSeeders(db);
+      console.log(" database seeding setup ok?:", seedersRunSuccessfully);
+    }
+    return Promise.resolve(migrationsRun && seedersRunSuccessfully);
   } catch (err) {
     console.error("Error setting up the database", err);
     return Promise.resolve(false);
