@@ -11,13 +11,11 @@ This code uses the following libaries:
 - [postgresql](https://www.postgresql.org/)
 - [umzug](https://github.com/sequelize/umzug) - database migrations
 
-This code assumes usage of sequelize@6 and sequelize-typescript requires sequelize
+This code assumes usage of sequelize@6 and sequelize-typescript requires sequelize and typescript.
 
 This proof of concept uses a repository to get data from database and uses [express](https://expressjs.com/).
 
 ## Get Started
-
-You will need to change directory into the "server" folder to install and run the application
 
 To get started perform the following steps:
 
