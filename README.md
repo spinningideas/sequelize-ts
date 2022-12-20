@@ -72,4 +72,4 @@ Use the client of your choice to run the requests to see api data and responses 
 
 - https://github.com/RobinBuschmann/sequelize-typescript-example
 - https://blog.logrocket.com/using-sequelize-with-typescript/
-- https://code.visualstudio.com/docs/editor/debugging
+- https://github.com/spinningideas/resources/wiki/Repositories
