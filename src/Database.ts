@@ -7,7 +7,7 @@ import { Dialect } from "sequelize";
 // this is a POC so credentials are stored here for convenience
 export const config = {
   username: "postgres",
-  password: "P0stGr3s",
+  password: "CHANGE_ME_TO_VALID_ENTRY",
   database: "sequelize_ts_orm_poc",
   host: "localhost",
   dialect: "postgres",
