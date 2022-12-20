@@ -1,69 +1,67 @@
-import { DataType } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import type { Migration } from "../runMigrations";
 
-async function up({ context: queryInterface }) {
-  console.log("Creating table country");
-  return await queryInterface.createTable("country", {
+export const up: Migration = async ({ context: sequelize }) => {
+  await sequelize.getQueryInterface().createTable("country", {
     countryId: {
       field: "country_id",
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataType.UUIDV4,
-      type: DataType.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
     },
     countryName: {
       field: "country_name",
-      type: DataType.STRING(100),
+      type: DataTypes.STRING(100),
       unique: true,
     },
     countryCode: {
       field: "country_code",
-      type: DataType.STRING(2),
+      type: DataTypes.STRING(2),
     },
     countryCode3: {
       field: "country_code3",
-      type: DataType.STRING(3),
+      type: DataTypes.STRING(3),
     },
     capital: {
       field: "capital",
-      type: DataType.STRING(100),
+      type: DataTypes.STRING(100),
     },
     continentCode: {
       field: "continent_code",
-      type: DataType.STRING(2),
+      type: DataTypes.STRING(2),
     },
     area: {
       field: "area",
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
     },
     population: {
       field: "population",
-      type: DataType.INTEGER,
+      type: DataTypes.INTEGER,
     },
     latitude: {
       field: "latitude",
-      type: DataType.DECIMAL(10, 6),
+      type: DataTypes.DECIMAL(10, 6),
     },
     longitude: {
       field: "longitude",
-      type: DataType.DECIMAL(10, 6),
+      type: DataTypes.DECIMAL(10, 6),
     },
     currencyCode: {
       field: "currency_code",
-      type: DataType.STRING(3),
+      type: DataTypes.STRING(3),
     },
     currencyName: {
       field: "currency_name",
-      type: DataType.STRING(50),
+      type: DataTypes.STRING(50),
     },
     languages: {
       field: "languages",
-      type: DataType.STRING(255),
+      type: DataTypes.STRING(255),
     },
   });
-}
+};
 
-async function down({ context: queryInterface }) {
-  return await queryInterface.dropTable("country");
-}
-
-export { up, down };
+export const down: Migration = async ({ context: sequelize }) => {
+  await sequelize.getQueryInterface().dropTable("country");
+};

@@ -54,6 +54,8 @@ The application is configured to use nodemon to monitor for file changes and you
 
 ```npm run start```
 
+NOTE: You can also run and debug the application if using vscode via the launch.json profile and debugging capabilities: https://code.visualstudio.com/docs/editor/debugging
+
 ### 7) exercise the application via postman OR thunder client
 
 #### 7.1 - Get a client
@@ -66,8 +68,8 @@ The application is configured to use nodemon to monitor for file changes and you
 
 Use the client of your choice to run the requests to see api data and responses after importing the collection in the "postman" folder
 
-
 ### 8 Inspiration and Read More
 
 - https://github.com/RobinBuschmann/sequelize-typescript-example
 - https://blog.logrocket.com/using-sequelize-with-typescript/
+- https://code.visualstudio.com/docs/editor/debugging

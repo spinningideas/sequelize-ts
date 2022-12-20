@@ -1,30 +1,28 @@
-import { DataType } from "sequelize-typescript";
+import { DataTypes } from "sequelize";
+import type { Migration } from "../runMigrations";
 
-async function up({ context: queryInterface }) {
-  console.log("Creating table continent");
-  return await queryInterface.createTable("continent", {
+export const up: Migration = async ({ context: sequelize }) => {
+  await sequelize.getQueryInterface().createTable("continent", {
     continentId: {
       field: "continent_id",
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataType.UUIDV4,
-      type: DataType.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      type: DataTypes.UUID,
     },
     continentCode: {
       field: "continent_code",
-      type: DataType.STRING(2),
+      type: DataTypes.STRING(2),
       unique: true,
     },
     continentName: {
       field: "continent_name",
-      type: DataType.STRING(50),
+      type: DataTypes.STRING(50),
       unique: true,
     },
   });
-}
+};
 
-async function down({ context: queryInterface }) {
-  return await queryInterface.dropTable("continent");
-}
-
-export { up, down };
+export const down: Migration = async ({ context: sequelize }) => {
+  await sequelize.getQueryInterface().dropTable("continent");
+};
