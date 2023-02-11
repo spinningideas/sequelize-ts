@@ -38,34 +38,35 @@ DB_SERVER=localhost
 
 ```
 
-DB_NAME=sequelize_ts_orm_poc
 #### 2.2 Create a database named "sequelize_ts_orm_poc" or named the same value you used in the .env var DB_NAME
 
-#### 2.3 enable access to the credentials from Database.ts (username: npm )
+DB_NAME=sequelize_ts_orm_poc OR name of your choice
+
+#### 2.3 enable access to the credentials from Database.ts (username from .env: DB_USER)
 
 ### 3) Install npm packages
 
 Install the required packages via standard command:
 
-```npm install```
+`npm install`
 
 ### 4) Create database schema using sequelize migrations
 
-See ```runMigrations.ts```
+See `runMigrations.ts`
 
-This will happen when you run ```npm run start```
+This will happen when you run `npm run start`
 
 ### 5) Populate database with data using sequelize data seeding
 
-See ```runSeeders.ts```
+See `runSeeders.ts`
 
-This will happen when you run ```npm run start```
+This will happen when you run `npm run start`
 
 ### 6) run the application
 
 The application is configured to use nodemon to monitor for file changes and you can run command to start the application using it. You will see console information with url and port.
 
-```npm run start```
+`npm run start`
 
 NOTE: You can also run and debug the application if using vscode via the launch.json profile and debugging capabilities: https://code.visualstudio.com/docs/editor/debugging
 
@@ -73,9 +74,9 @@ NOTE: You can also run and debug the application if using vscode via the launch.
 
 #### 7.1 - Get a client
 
-1) https://www.thunderclient.com/
+1. https://www.thunderclient.com/
 
-2) https://www.getpostman.com - Download and install https://www.getpostman.com 
+2. https://www.getpostman.com - Download and install https://www.getpostman.com
 
 #### 7.2 - Import "postman" collection and run requests
 
@@ -85,7 +86,7 @@ Use the client of your choice to run the requests to see api data and responses 
 
 - https://github.com/RobinBuschmann/sequelize-typescript-example
 - https://blog.logrocket.com/using-sequelize-with-typescript/
-- https://github.com/spinningideas/resources/wiki/Repositories 
+- https://github.com/spinningideas/resources/wiki/Repositories
 - https://github.com/fabianfrangella/sequelize-repository
 - https://github.com/fabianfrangella/sequelize-repository/blob/main/src/repository/SQRepository.js
 - https://github.com/blugavere/node-repositories/blob/master/packages/postgres-repository/index.js
