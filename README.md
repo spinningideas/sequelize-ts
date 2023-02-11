@@ -26,9 +26,22 @@ https://www.postgresql.org/download/
 ### 2) Create PostGreSQL database to use in this POC
 
 After installing locally you should have a database server - you will need to do these steps:
-#### 2.1 Create an empty database named "sequelize_ts_orm_poc"
 
-#### 2.2 enable access to the credentials from Database.ts (username: npm )
+#### 2.1 Copy ".env.template" file into standard ".env" file so that you have valid file present and update the values in it to have correct set with valid database name and credentials (DB_USER, DB_PASSWORD)
+
+```
+DB_USER=postgres
+DB_PASSWORD=CHANGE_ME_TO_VALID_ENTRY
+DB_NAME=sequelize_ts_orm_poc
+DB_DIALECT=postgres
+DB_SERVER=localhost
+
+```
+
+DB_NAME=sequelize_ts_orm_poc
+#### 2.2 Create a database named "sequelize_ts_orm_poc" or named the same value you used in the .env var DB_NAME
+
+#### 2.3 enable access to the credentials from Database.ts (username: npm )
 
 ### 3) Install npm packages
 

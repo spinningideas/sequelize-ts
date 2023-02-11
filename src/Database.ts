@@ -7,7 +7,7 @@ import { env } from "./utils";
 // NOTE: this should come from .env file and NOT be hardcoded here
 // this is a POC so credentials are stored here for convenience
 export const config = {
-  username: "postgres",
+  username: env("DB_USER"),
   password: env("DB_PASSWORD"),
   database: env("DB_NAME"),
   host: env("DB_SERVER"),

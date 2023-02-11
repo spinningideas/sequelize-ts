@@ -105,7 +105,7 @@ async function configureDatabase() {
     if (migrationsRun) {
       console.log(`Running database seeding`);
       seedersRunSuccessfully = await runSeeders(db);
-      console.log(" database seeding setup ok?:", seedersRunSuccessfully);
+      console.log("Database seeding setup ok?:", seedersRunSuccessfully);
     }
     return Promise.resolve(migrationsRun && seedersRunSuccessfully);
   } catch (err) {
