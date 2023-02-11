@@ -28,7 +28,7 @@ https://www.postgresql.org/download/
 After installing locally you should have a database server - you will need to do these steps:
 #### 2.1 Create an empty database named "sequelize_ts_orm_poc"
 
-#### 2.2 enable access to the credentials from Database.ts (username: postgres)
+#### 2.2 enable access to the credentials from Database.ts (username: npm )
 
 ### 3) Install npm packages
 
@@ -72,4 +72,10 @@ Use the client of your choice to run the requests to see api data and responses 
 
 - https://github.com/RobinBuschmann/sequelize-typescript-example
 - https://blog.logrocket.com/using-sequelize-with-typescript/
-- https://github.com/spinningideas/resources/wiki/Repositories
+- https://github.com/spinningideas/resources/wiki/Repositories 
+- https://github.com/fabianfrangella/sequelize-repository
+- https://github.com/fabianfrangella/sequelize-repository/blob/main/src/repository/SQRepository.js
+- https://github.com/blugavere/node-repositories/blob/master/packages/postgres-repository/index.js
+- https://stackoverflow.com/questions/69051499/typescript-repository-pattern-with-sequelize
+- https://khalilstemmler.com/articles/typescript-domain-driven-design/repository-dto-mapper/
+- https://stackoverflow.com/questions/69051499/typescript-repository-pattern-with-sequelize

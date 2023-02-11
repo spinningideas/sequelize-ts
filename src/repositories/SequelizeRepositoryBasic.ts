@@ -2,9 +2,11 @@
 import { Sequelize } from "sequelize-typescript";
 
 /**
- * Implementation of repository pattern via sequelize
+ * Implementation of repository pattern via sequelize in a basic form that
+ * is directly tied to a given model that has been mapped within the sequelize
+ * instance provided ahead of this repository being called.
  */
-const SequelizeRepository = (_sequelize?: Sequelize, _modelType?: string) => {
+const SequelizeRepositoryBasic = (_sequelize?: Sequelize, _modelType?: string) => {
   const sequelize = _sequelize;
   const modelType = _modelType;
   let model = sequelize[_modelType];
@@ -230,4 +232,4 @@ const SequelizeRepository = (_sequelize?: Sequelize, _modelType?: string) => {
   };
 };
 
-export default SequelizeRepository;
+export default SequelizeRepositoryBasic;

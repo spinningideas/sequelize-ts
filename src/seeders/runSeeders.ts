@@ -1,4 +1,4 @@
-import SequelizeRepository from "../repositories/SequelizeRepository";
+import SequelizeRepository from "../repositories/SequelizeRepositoryBasic";
 import { Sequelize } from "sequelize-typescript";
 // import Continent from "../models/Continent";
 // import Country from "../models/Country";

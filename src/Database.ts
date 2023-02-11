@@ -2,15 +2,16 @@ import { Sequelize } from "sequelize-typescript";
 import Country from "./models/Country";
 import Continent from "./models/Continent";
 import { Dialect } from "sequelize";
+import { env } from "./utils";
 
 // NOTE: this should come from .env file and NOT be hardcoded here
 // this is a POC so credentials are stored here for convenience
 export const config = {
   username: "postgres",
-  password: "CHANGE_ME_TO_VALID_ENTRY",
-  database: "sequelize_ts_orm_poc",
-  host: "localhost",
-  dialect: "postgres",
+  password: env("DB_PASSWORD"),
+  database: env("DB_NAME"),
+  host: env("DB_SERVER"),
+  dialect: env("DB_DIALECT"),
   logging: console.log,
 };
 
