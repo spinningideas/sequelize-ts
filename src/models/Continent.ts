@@ -7,7 +7,7 @@ import {
   AllowNull,
 } from "sequelize-typescript";
 
-@Table({ tableName: "continent", freezeTableName: true, timestamps: false })
+@Table({ tableName: "continents", freezeTableName: true, timestamps: false })
 class Continent extends Model {
   @PrimaryKey
   @AllowNull(false)

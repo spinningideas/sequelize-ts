@@ -15,8 +15,8 @@
     "noUnusedLocals": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "types": ["node"]
+    "types": ["cypress", "node"]
   },
   "compileOnSave": true,
-  "include": ["src/**/*.ts", "src/migrations/1-continent-migration.ts", "src/migrations/2-country-migration.ts"]
+  "include": ["src/**/*.ts"]
 }

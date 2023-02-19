@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import type { Migration } from "../runMigrations";
 
 export const up: Migration = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().createTable("continent", {
+  await sequelize.getQueryInterface().createTable("continents", {
     continentId: {
       field: "continent_id",
       allowNull: false,
@@ -24,5 +24,5 @@ export const up: Migration = async ({ context: sequelize }) => {
 };
 
 export const down: Migration = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable("continent");
+  await sequelize.getQueryInterface().dropTable("continents");
 };

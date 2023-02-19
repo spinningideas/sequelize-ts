@@ -5,7 +5,7 @@ import { Dialect } from "sequelize";
 import { env } from "./utils";
 
 // NOTE: this should come from .env file and NOT be hardcoded here
-// this is a POC so credentials are stored here for convenience
+// credentials are stored in the .env file
 export const config = {
   username: env("DB_USER"),
   password: env("DB_PASSWORD"),

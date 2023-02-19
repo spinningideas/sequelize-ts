@@ -126,7 +126,7 @@ abstract class BaseRepository<M extends sequelize.Model>
     pageSize: number,
     orderBy: string,
     orderDesc: boolean
-  ) {
+  ): Promise<{ totalItems: any; totalPages: number; rows: any; currentPage: number; }> {
     const { limit, offset } = pagination.getPagination(pageNumber, pageSize);
     const condition = criteria.getCriteria();
     let order;

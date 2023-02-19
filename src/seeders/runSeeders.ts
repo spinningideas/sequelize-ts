@@ -1,9 +1,9 @@
 import SequelizeRepository from "../repositories/SequelizeRepositoryBasic";
 import { Sequelize } from "sequelize-typescript";
-// import Continent from "../models/Continent";
-// import Country from "../models/Country";
 import continentData from "./continentData";
 import countryData from "./countryData";
+import Country from "../models/Country";
+import Continent from "../models/Continent";
 
 const seedContinents = async (sequelize) => {
   // const continentRepo = sequelize.getRepository(Continent);
@@ -11,7 +11,7 @@ const seedContinents = async (sequelize) => {
   console.log("Running seeding of continents");
   const data = continentData;
   for (let i = 0; i < data.length; i++) {
-    let continent = data[i];
+    let continent = data[i] as Continent;
     console.log(`Seeding continent: ${continent.continentName}`);
     await continentRepo.upsert(
       { continentId: continent.continentId },
@@ -26,9 +26,9 @@ const seedCountries = async (sequelize) => {
   console.log("Running seeding of countries");
   const data = countryData;
   for (let i = 0; i < data.length; i++) {
-    let country = data[i];
-    console.log(`Seeding country: ${country.countryName}`);
+    let country = data[i] as Country;
     await countryRepo.upsert({ countryId: country.countryId }, country);
+    console.log(`Seeded country: ${country.countryName}`);
   }
 };
 

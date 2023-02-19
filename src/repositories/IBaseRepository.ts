@@ -1,5 +1,6 @@
 import { Criteria } from "repositories/Criteria";
 import RepositoryResult from "repositories/RepositoryResult";
+import RepositoryResultPaged from "repositories/RepositoryResultPaged";
 
 /**
  * @summary Interface that encapsulates repositories for entities with
@@ -38,7 +39,7 @@ export interface IBaseRepository<M> {
     pageSize: number,
     orderBy: string,
     orderDesc: boolean
-  ): RepositoryResult<M[]>;
+  ): RepositoryResultPaged<M,>;
 
   findAll(): RepositoryResult<M[]>;
   countWhere(criteria: Criteria): RepositoryResult<number>;

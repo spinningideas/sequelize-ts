@@ -10,12 +10,14 @@ import {
 } from "sequelize-typescript";
 import Continent from "./Continent";
 
-@Table({ tableName: "country", freezeTableName: true, timestamps: false })
+@Table({ tableName: "countries", freezeTableName: true, timestamps: false })
 class Country extends Model {
   @PrimaryKey
   @AllowNull(false)
   @Column({
+    primaryKey: true,
     type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
     comment: "PK for Country",
     field: "country_id",
   })
@@ -56,11 +58,11 @@ class Country extends Model {
   @AllowNull(false)
   @ForeignKey(() => Continent)
   @Column({
-    type: DataType.STRING(2),
-    comment: "Code for Continent that Country is on",
-    field: "continent_code",
+    type: DataType.UUID,
+    comment: "Identifier for Continent that Country is lo on",
+    field: "continent_id",
   })
-  continentCode: string;
+  continentId: string;
 
   @BelongsTo(() => Continent)
   continent: Continent;
@@ -113,7 +115,6 @@ class Country extends Model {
     field: "languages",
   })
   languages: string;
-
 }
 
 export default Country;

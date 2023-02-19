@@ -6,7 +6,10 @@ import { Sequelize } from "sequelize-typescript";
  * is directly tied to a given model that has been mapped within the sequelize
  * instance provided ahead of this repository being called.
  */
-const SequelizeRepositoryBasic = (_sequelize?: Sequelize, _modelType?: string) => {
+const SequelizeRepositoryBasic = (
+  _sequelize?: Sequelize,
+  _modelType?: string
+) => {
   const sequelize = _sequelize;
   const modelType = _modelType;
   let model = sequelize[_modelType];
@@ -98,24 +101,17 @@ const SequelizeRepositoryBasic = (_sequelize?: Sequelize, _modelType?: string) =
     const offset = (pageNumber - 1) * pageSize;
     const limit = pageSize;
     let orderDirection = "ASC";
-    if (orderDesc || orderDesc.toString().toLowerCase() === "true") {
+    if (
+      orderDesc === true ||
+      orderDesc.toString().toLowerCase() === "true" ||
+      orderDesc.toString().toLowerCase() === "desc"
+    ) {
       orderDirection = "DESC";
     }
     const order = [[orderBy, orderDirection]];
 
-    const resultCount = await getModel()
-      .count({ where: criteria })
-      .then(
-        (data) => {
-          return data;
-        },
-        (err) => {
-          return err;
-        }
-      );
-
-    const resultData = await getModel()
-      .findAll({
+    const results = await getModel()
+      .findAndCountAll({
         limit,
         offset,
         where: criteria,
@@ -130,7 +126,7 @@ const SequelizeRepositoryBasic = (_sequelize?: Sequelize, _modelType?: string) =
         }
       );
 
-    return { total: resultCount, data: resultData };
+    return { total: results.count, data: results.rows };
   };
 
   /**

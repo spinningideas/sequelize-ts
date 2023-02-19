@@ -2,12 +2,12 @@ import { DataTypes } from "sequelize";
 import type { Migration } from "../runMigrations";
 
 export const up: Migration = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().createTable("country", {
+  await sequelize.getQueryInterface().createTable("countries", {
     countryId: {
       field: "country_id",
       allowNull: false,
       primaryKey: true,
-      defaultValue: DataTypes.UUIDV4,
+      defaultValue: DataTypes.UUID,
       type: DataTypes.UUID,
     },
     countryName: {
@@ -27,9 +27,16 @@ export const up: Migration = async ({ context: sequelize }) => {
       field: "capital",
       type: DataTypes.STRING(100),
     },
-    continentCode: {
-      field: "continent_code",
-      type: DataTypes.STRING(2),
+    continentId: {
+      field: "continent_id",
+      type: DataTypes.UUID,
+      references: {
+        model: {
+          tableName: "continents",
+        },
+        key: "continent_id",
+      },
+      allowNull: false,
     },
     area: {
       field: "area",
@@ -63,5 +70,5 @@ export const up: Migration = async ({ context: sequelize }) => {
 };
 
 export const down: Migration = async ({ context: sequelize }) => {
-  await sequelize.getQueryInterface().dropTable("country");
+  await sequelize.getQueryInterface().dropTable("countries");
 };

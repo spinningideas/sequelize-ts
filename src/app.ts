@@ -12,8 +12,6 @@ const PORT = process.env.PORT || 5001;
 const HOST = process.env.HOST || "localhost";
 
 // Setup app
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 const db = Database;
@@ -54,14 +52,19 @@ app.get(
     const { orderBy } = req.params;
     const { orderDesc } = req.params;
 
+    const repoContinents = SequelizeRepository(db, "Continent");
     const repoCountries = SequelizeRepository(db, "Country");
+
+    const continent = await repoContinents.findOneWhere({
+      continentCode: continentCode,
+    });
 
     const currentPageNumber = pageNumber as unknown as number;
     const currentPageSize = pageSize as unknown as number;
 
     return await repoCountries
       .findWherePagedSorted(
-        { continentCode: continentCode },
+        { continentId: continent.continentId },
         currentPageNumber,
         currentPageSize,
         orderBy,
