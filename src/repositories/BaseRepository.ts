@@ -2,25 +2,34 @@ import sequelize from "sequelize";
 import { IBaseRepository } from "repositories/IBaseRepository";
 import { Criteria } from "repositories/Criteria";
 import RepositoryResult from "repositories/RepositoryResult";
+import RepositoryResultPaged from "repositories/RepositoryResultPaged";
+
+const DEFAULT_PAGE_SIZE = 10;
 
 const pagination = {
   getPagination: (page: number, size: number) => {
-    const limit = size ? +size : 10;
+    const limit = size ? +size : DEFAULT_PAGE_SIZE;
     const offset = page ? page * limit : 0;
-
     return { limit, offset };
   },
-  getPagingData: (data: any, page: number, limit: number) => {
+  getPagedData<M>(
+    success: boolean,
+    data: any,
+    page: number,
+    limit: number
+  ): RepositoryResultPaged<M, any> {
     const { count: totalItems, rows } = data;
     const currentPage = page ? +page : 0;
     const totalPages = Math.ceil(totalItems / limit);
 
     return {
+      success,
+      data: rows,
       totalItems,
-      rows,
+      errors: undefined,
       totalPages,
       currentPage,
-    };
+    } as unknown as RepositoryResultPaged<M, any>;
   },
 };
 
@@ -54,7 +63,7 @@ const initNamedQueries = (that: any, model: any) => {
             offset,
             include: { all: true },
           });
-          return pagination.getPagingData(response, page, limit);
+          return pagination.getPagedData(true, response, page, limit);
         };
       } else {
         that[n] = async function (slice: any, ...args: any) {
@@ -126,7 +135,7 @@ abstract class BaseRepository<M extends sequelize.Model>
     pageSize: number,
     orderBy: string,
     orderDesc: boolean
-  ): Promise<{ totalItems: any; totalPages: number; rows: any; currentPage: number; }> {
+  ): Promise<RepositoryResultPaged<M, unknown>> {
     const { limit, offset } = pagination.getPagination(pageNumber, pageSize);
     const condition = criteria.getCriteria();
     let order;
@@ -140,7 +149,7 @@ abstract class BaseRepository<M extends sequelize.Model>
         order,
         include: { all: true },
       });
-      return pagination.getPagingData(response, pageNumber, limit);
+      return pagination.getPagedData(true, response, pageNumber, limit);
     }
     response = await this.model.findAndCountAll({
       where: condition,
@@ -148,7 +157,7 @@ abstract class BaseRepository<M extends sequelize.Model>
       offset,
       include: { all: true },
     });
-    return pagination.getPagingData(response, pageNumber, limit);
+    return pagination.getPagedData(true, response, pageNumber, limit);
   }
 
   /**
@@ -192,9 +201,10 @@ abstract class BaseRepository<M extends sequelize.Model>
     for (let i = 0; i < models.length; i++) {
       let m = models[i];
       let result = await this.create(m);
-      results.push(result);
+      let resultType = result.getData() as unknown as RepositoryResult<M>;
+      results.push(resultType);
     }
-    return results;
+    return results as any;
   }
 
   async updateWhere(criteria: Criteria, model: M): RepositoryResult<M> {
@@ -202,16 +212,16 @@ abstract class BaseRepository<M extends sequelize.Model>
     if (model.dataValues) {
       val = { ...model.dataValues };
     }
-    const res = await this.model.upsert({ ...val });
+    const res = await this.model.upsert({ ...val }, criteria);
     return res[1] ? res[0] : null;
   }
 
-  upsertWhere(criteria: Criteria, model: M): RepositoryResult<M> {
+  async upsertWhere(criteria: Criteria, model: M): RepositoryResult<M> {
     let val = model;
     if (model.dataValues) {
       val = { ...model.dataValues };
     }
-    const res = await this.model.upsert({ ...val });
+    const res = await this.model.upsert({ ...val }, criteria);
     return res[1] ? res[0] : null;
   }
 
@@ -221,7 +231,7 @@ abstract class BaseRepository<M extends sequelize.Model>
    * @returns {Promise<*|Model|null>}
    */
   async deleteWhere(criteria: Criteria) {
-    const d = this.model.findOne({ where: criteria, include: { all: true } });
+    const d = this.model.findOne({ criteria, include: { all: true } });
     return this.model.remove(d);
   }
 

@@ -39,7 +39,7 @@ export interface IBaseRepository<M> {
     pageSize: number,
     orderBy: string,
     orderDesc: boolean
-  ): RepositoryResultPaged<M,>;
+  ): Promise<RepositoryResultPaged<M, unknown>>;
 
   findAll(): RepositoryResult<M[]>;
   countWhere(criteria: Criteria): RepositoryResult<number>;

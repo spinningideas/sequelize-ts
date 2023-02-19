@@ -10,6 +10,7 @@ This code uses the following libaries:
 - [express](https://expressjs.com/)
 - [postgresql](https://www.postgresql.org/)
 - [umzug](https://github.com/sequelize/umzug) - database migrations
+- [cypress](https://www.cypress.io/) - testing
 
 This code assumes usage of sequelize@6 and sequelize-typescript requires sequelize and typescript.
 
@@ -81,6 +82,22 @@ NOTE: You can also run and debug the application if using vscode via the launch.
 #### 7.2 - Import "postman" collection and run requests
 
 Use the client of your choice to run the requests to see api data and responses after importing the collection in the "postman" folder
+
+#### 7.3 - Run the cypress tests AFTER first starting the app via "npm start"
+
+Open a new termincal and use the cypress test runner to run the tests.
+
+When cypress launches chose end2end test and Electron then run the tests as you wish to see the API that is produced by express and sequelize.
+
+```
+npm run cypress:open
+```
+
+And then run
+
+```
+npm run cypress:run
+```
 
 ### 8 Inspiration and Read More
 

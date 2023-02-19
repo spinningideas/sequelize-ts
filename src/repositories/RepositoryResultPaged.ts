@@ -7,10 +7,20 @@
  */
 export class RepositoryResultPaged<DataType, ErrorType> {
   public success: boolean;
-  private error: ErrorType;
-  private data: DataType;
+  public error: ErrorType;
+  public data: DataType;
+  public currentPage: number;
+  public totalRows: number;
+  public totalItems: number;
 
-  private constructor(success: boolean, data: DataType, error: ErrorType) {
+  private constructor(
+    success: boolean,
+    data: DataType,
+    error: ErrorType,
+    currentPage: number,
+    totalRows: number,
+    totalItems: number
+  ) {
     if (success && error) {
       throw new Error("Successful result must not contain an error");
     } else if (!error) {
@@ -20,18 +30,41 @@ export class RepositoryResultPaged<DataType, ErrorType> {
     this.success = success;
     this.data = data;
     this.error = error;
+    this.currentPage = currentPage;
+    this.totalRows = totalRows;
+    this.totalItems = totalItems;
   }
 
   public static ok<DataType>(
-    data: DataType
+    data: DataType,
+    currentPage: number,
+    totalRows: number,
+    totalItems: number
   ): RepositoryResultPaged<DataType, undefined> {
-    return new RepositoryResultPaged(true, data, undefined);
+    return new RepositoryResultPaged(
+      true,
+      data,
+      undefined,
+      currentPage,
+      totalRows,
+      totalItems
+    );
   }
 
   public static fail<ErrorType>(
-    error: ErrorType
+    error: ErrorType,
+    currentPage: number,
+    totalRows: number,
+    totalItems: number
   ): RepositoryResultPaged<undefined, ErrorType> {
-    return new RepositoryResultPaged(false, undefined, error);
+    return new RepositoryResultPaged(
+      false,
+      undefined,
+      error,
+      currentPage,
+      totalRows,
+      totalItems
+    );
   }
 
   public getError(): ErrorType {

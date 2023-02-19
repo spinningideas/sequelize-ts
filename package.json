@@ -1,13 +1,13 @@
 {
   "name": "sequelize-ts-orm-poc",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "sequelize typescript ORM Proof Of Concept + Cypress testing",
-  "main": "dist/index.js",
+  "main": "dist/app.js",
   "scripts": {
     "dev": "ts-node-dev --respawn src/app.ts",
     "dev:debug": "ts-node-dev --inspect=localhost:5001 src/app.ts",
     "build": "tsc",
-    "start": "node dist/server.js",
+    "start": "node dist/app.js",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run"
   },

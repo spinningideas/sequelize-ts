@@ -27,8 +27,6 @@ describe("API Testing", function () {
     });
   });
 
-
-  
   it("API - GET countries in North America Paged - First page sorted by countryName DESC", () => {
     cy.request({
       method: "GET",
@@ -52,6 +50,4 @@ describe("API Testing", function () {
       cy.log(JSON.stringify(response.body as unknown));
     });
   });
-
-
 });
